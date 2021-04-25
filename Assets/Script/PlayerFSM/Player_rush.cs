@@ -44,12 +44,12 @@ public class Player_rush : PlayerFSM_base
     public override void loop(newPlayerController body)
     {
         base.loop(body);
-        
+        if (attack) { body.thisRigidbody2D.velocity = Vector3.zero; }
         body.velocity = new Vector2(travelDistance*Mathf.Sign(transform.localScale.x) / dashDuration, 0);
 
         if (At(counter, duration - dashDuration))
         {
-            if (attack) { hitbox.gameObject.SetActive(true); }
+            if (attack) { hitbox.gameObject.SetActive(true);}
             else { counter -= 0.25f; }
             
         }
