@@ -35,22 +35,41 @@ public class newPlayerController : GroundUnit
     [SerializeField, Tooltip("Time before reaching max gravity scale")]
     float gravityTime= 0.5f;
 
-    private Rigidbody2D thisRigidbody2D;
+    public Rigidbody2D thisRigidbody2D;
+    public SpriteRenderer thisSpriteRenderer; 
 
-    private Vector2 velocity;
+    public Vector2 velocity;
+    public Vector3 iniScale;
     private float jumpCounter;
 
+    public PlayerFSM_base currentState;
+    public PlayerFSM_base state_neutral;
+    public PlayerFSM_base state_dash;
+    public PlayerFSM_base state_attack1;
+    public PlayerFSM_base state_attackAir;
     // Start is called before the first frame update
     void Start()
     {
         thisRigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+        thisSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        iniScale = transform.localScale;
+        currentState = state_neutral;
     }
 
+    public void changeState(PlayerFSM_base newState)
+    {
+        currentState.leave(this);
+        currentState = newState;
+        currentState.enter(this);
+    }
     // Update is called once per frame
     void Update()
     {
         movement();
+        jump();
+        currentState.loop(this);
         
+        transform.Translate(velocity * Time.deltaTime);
     }
 
     void movement()
@@ -59,7 +78,7 @@ public class newPlayerController : GroundUnit
         float acceleration = grounded ? walkAcceleration : airAcceleration;
         float deceleration = grounded ? groundDeceleration : airDeceleration;
         
-        jump();
+        
 
         if (moveInput != 0)
         {
@@ -69,7 +88,6 @@ public class newPlayerController : GroundUnit
         {
             velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
         }
-        transform.Translate(velocity * Time.deltaTime);
     }
 
     void jump()
