@@ -11,6 +11,7 @@ public class Player_attackAir : PlayerFSM_base
     {
         base.enter(body);
         counter = duration;
+        body.thisAnimator.Play("player_attackAir");
     }
 
     public override void loop(newPlayerController body)

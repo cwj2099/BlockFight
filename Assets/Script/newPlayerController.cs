@@ -36,7 +36,8 @@ public class newPlayerController : GroundUnit
     float gravityTime= 0.5f;
 
     public Rigidbody2D thisRigidbody2D;
-    public SpriteRenderer thisSpriteRenderer; 
+    public SpriteRenderer thisSpriteRenderer;
+    public Animator thisAnimator;
 
     public Vector2 velocity;
     public Vector3 iniScale;

@@ -49,7 +49,7 @@ public class Player_rush : PlayerFSM_base
 
         if (At(counter, duration - dashDuration))
         {
-            if (attack) { hitbox.gameObject.SetActive(true);}
+            if (attack) { hitbox.gameObject.SetActive(true); body.thisAnimator.Play("player_attackDash"); }
             else { counter -= 0.25f; }
             
         }
