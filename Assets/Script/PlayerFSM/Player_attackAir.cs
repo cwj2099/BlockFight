@@ -42,5 +42,6 @@ public class Player_attackAir : PlayerFSM_base
     {
         base.leave(body);
         hitbox.deactivate();
+        body.thisAnimator.Play("player_idle");
     }
 }

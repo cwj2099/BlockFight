@@ -16,6 +16,7 @@ public class HitBox : MonoBehaviour
         {
             hitforce.x = Mathf.Abs(hitforce.x) * Mathf.Sign(transform.parent.localScale.x);
             whiteList.Add(collision);
+            collision.attachedRigidbody.velocity = Vector2.zero;
             collision.attachedRigidbody.AddForce(hitforce);
         }
         

@@ -20,6 +20,7 @@ public class Player_rush : PlayerFSM_base
     {
         base.enter(body);
         attack = false;
+        body.thisAnimator.Play("player_dash");
 
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
@@ -46,10 +47,10 @@ public class Player_rush : PlayerFSM_base
         base.loop(body);
         if (attack) { body.thisRigidbody2D.velocity = Vector3.zero; }
         body.velocity = new Vector2(travelDistance*Mathf.Sign(transform.localScale.x) / dashDuration, 0);
-
+        
         if (At(counter, duration - dashDuration))
         {
-            if (attack) { hitbox.gameObject.SetActive(true); body.thisAnimator.Play("player_attackDash"); }
+            if (attack) { hitbox.gameObject.SetActive(true);  }
             else { counter -= 0.25f; }
             
         }

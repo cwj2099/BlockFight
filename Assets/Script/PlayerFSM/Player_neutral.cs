@@ -12,8 +12,8 @@ public class Player_neutral : PlayerFSM_base
     public override void loop(newPlayerController body)
     {
         base.loop(body);
-        float dashInput = Input.GetAxisRaw("Fire3");
-        float attackInput = Input.GetAxisRaw("Fire1");
+        //float dashInput = Input.GetAxisRaw("Fire3");
+        //float attackInput = Input.GetAxisRaw("Fire1");
 
         //change facing accoridngly
         if (Input.GetAxisRaw("Horizontal") != 0)
@@ -23,11 +23,11 @@ public class Player_neutral : PlayerFSM_base
         
 
 
-        if (dashInput == 1)
+        if (Input.GetKeyDown(KeyCode.L))
         {
             body.changeState(body.state_dash);
         }
-        else if (attackInput == 1)
+        else if (Input.GetKeyDown(KeyCode.J))
         {
             if (body.grounded)
             {

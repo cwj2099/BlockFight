@@ -47,6 +47,8 @@ public class newPlayerController : GroundUnit
     public PlayerFSM_base state_neutral;
     public PlayerFSM_base state_dash;
     public PlayerFSM_base state_attack1;
+    public PlayerFSM_base state_attack2;
+    public PlayerFSM_base state_attack3;
     public PlayerFSM_base state_attackAir;
     // Start is called before the first frame update
     void Start()
@@ -93,10 +95,10 @@ public class newPlayerController : GroundUnit
 
     void jump()
     {
-        float jumpInput = Input.GetAxisRaw("Jump");
+        //float jumpInput = Input.GetAxisRaw("Jump");
         if (grounded)
         {
-            if (jumpInput == 1)
+            if (Input.GetKey(KeyCode.K))
             {
                 thisRigidbody2D.gravityScale = 0;
                 jumpCounter = Time.deltaTime;
@@ -106,7 +108,7 @@ public class newPlayerController : GroundUnit
         else {
             if (thisRigidbody2D.gravityScale == 0)
             {
-                if (jumpInput == 1&&jumpCounter<jumpTime)
+                if (Input.GetKey(KeyCode.K)&&jumpCounter<jumpTime)
                 {
                     velocity.y = jumpHeight / jumpTime;
                     jumpCounter += Time.deltaTime;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_attack1 : PlayerFSM_base
+public class Player_attack2 : PlayerFSM_base
 {
     public HitBox hitbox;
     public float duration;
@@ -11,7 +11,7 @@ public class Player_attack1 : PlayerFSM_base
     {
         base.enter(body);
         counter = duration;
-        body.thisAnimator.Play("player_attack1");
+        body.thisAnimator.Play("player_attack2");
     }
 
     public override void loop(newPlayerController body)
@@ -21,12 +21,12 @@ public class Player_attack1 : PlayerFSM_base
         body.velocity = Vector2.zero;
 
         //if arrive this moment, do something form
-        if (At(counter,duration-0.12f))
+        if (At(counter, duration - 0.12f))
         {
             hitbox.gameObject.SetActive(true);
         }
 
-        if (At(counter, duration-0.22f))
+        if (At(counter, duration - 0.22f))
         {
             hitbox.deactivate();
         }
@@ -36,11 +36,11 @@ public class Player_attack1 : PlayerFSM_base
 
         if (counter <= duration - 0.22f)
         {
-            if (Input.GetKey(KeyCode.J)) { body.changeState(body.state_attack2); }    
+            if (Input.GetKey(KeyCode.J)) { body.changeState(body.state_attack3); }
         }
 
         //return to neutral if time up or jump cancel
-        if (counter <= 0|| Input.GetAxisRaw("Jump")==1)
+        if (counter <= 0 || Input.GetAxisRaw("Jump") == 1)
         {
             body.changeState(body.state_neutral);
         }
