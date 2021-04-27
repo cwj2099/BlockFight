@@ -5,6 +5,7 @@ using UnityEngine;
 public class HitBox : MonoBehaviour
 {
     public Vector2 hitforce;
+    public bool hit;
 
     List<Collider2D> whiteList=new List<Collider2D>();
     // Start is called before the first frame update
@@ -14,6 +15,7 @@ public class HitBox : MonoBehaviour
     {
         if (!whiteList.Contains(collision))
         {
+            hit = true;
             hitforce.x = Mathf.Abs(hitforce.x) * Mathf.Sign(transform.parent.localScale.x);
             whiteList.Add(collision);
             collision.attachedRigidbody.velocity = Vector2.zero;
@@ -26,5 +28,6 @@ public class HitBox : MonoBehaviour
     {
         whiteList.Clear();
         gameObject.SetActive(false);
+        hit = false;
     }
 }

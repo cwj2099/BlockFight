@@ -93,12 +93,12 @@ public class newPlayerController : GroundUnit
         }
     }
 
-    void jump()
+    public void jump()
     {
         //float jumpInput = Input.GetAxisRaw("Jump");
         if (grounded)
         {
-            if (Input.GetKey(KeyCode.K))
+            if (Input.GetKeyDown(KeyCode.K))
             {
                 thisRigidbody2D.gravityScale = 0;
                 jumpCounter = Time.deltaTime;

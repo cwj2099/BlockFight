@@ -43,6 +43,7 @@ public class Player_attack1 : PlayerFSM_base
         if (counter <= 0|| Input.GetAxisRaw("Jump")==1)
         {
             body.changeState(body.state_neutral);
+            body.jump();
         }
 
         if (Input.GetAxisRaw("Fire3") == 1)
