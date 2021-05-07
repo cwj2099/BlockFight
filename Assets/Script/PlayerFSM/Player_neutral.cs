@@ -16,18 +16,21 @@ public class Player_neutral : PlayerFSM_base
         //float attackInput = Input.GetAxisRaw("Fire1");
 
         //change facing accoridngly
+        if (body.grounded)
+        {
+            if (body.energy < body.energyMax)
+            {
+                body.energy += Time.deltaTime*body.energyMax;
+            }
+            body.energy = Mathf.Min(body.energyMax, body.energy);
+        }
+
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
             body.transform.localScale = new Vector3(body.iniScale.x * Input.GetAxisRaw("Horizontal"), body.iniScale.y, body.iniScale.z);
         }
-        
 
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            body.changeState(body.state_dash);
-        }
-        else if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.J))
         {
             if (body.grounded)
             {
@@ -39,6 +42,7 @@ public class Player_neutral : PlayerFSM_base
             }
             
         }
+        body.attempDash();
     }
 
     public override void leave(newPlayerController body)

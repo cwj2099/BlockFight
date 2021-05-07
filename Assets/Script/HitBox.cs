@@ -6,6 +6,8 @@ public class HitBox : MonoBehaviour
 {
     public Vector2 hitforce;
     public bool hit;
+    public float damage;
+    public float time;
 
     List<Collider2D> whiteList=new List<Collider2D>();
     // Start is called before the first frame update
@@ -18,8 +20,22 @@ public class HitBox : MonoBehaviour
             hit = true;
             hitforce.x = Mathf.Abs(hitforce.x) * Mathf.Sign(transform.parent.localScale.x);
             whiteList.Add(collision);
-            collision.attachedRigidbody.velocity = Vector2.zero;
-            collision.attachedRigidbody.AddForce(hitforce);
+            
+            if (collision.gameObject.GetComponent<HurtBox>())
+            {
+                HurtBox hurtBox= collision.gameObject.GetComponent<HurtBox>();
+                hurtBox.damage = damage;
+                hurtBox.time = time;
+                if (hurtBox.myRigidbody2D != null&&!hurtBox.steal)
+                {
+                    hurtBox.myRigidbody2D.velocity = Vector2.zero;
+                    hurtBox.myRigidbody2D.AddForce(hitforce);
+                }
+                if (hurtBox.myGroundUnit != null)
+                {
+                    hurtBox.myGroundUnit.GetHurt();
+                }
+            }
         }
         
     }

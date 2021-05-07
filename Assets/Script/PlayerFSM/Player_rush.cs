@@ -24,6 +24,7 @@ public class Player_rush : PlayerFSM_base
     public override void enter(newPlayerController body)
     {
         base.enter(body);
+
         attack = false;
         body.thisAnimator.Play("player_dash");
 
@@ -107,10 +108,7 @@ public class Player_rush : PlayerFSM_base
 
                 if (counter < attackDuration - 0.22f)
                 {
-                    if(Input.GetKeyDown(KeyCode.L) )
-                    {
-                        body.changeState(body.state_dash);
-                    }
+                    body.attempDash();
 
                     if (Input.GetKeyDown(KeyCode.J))
                     {

@@ -361,6 +361,13 @@ AnimationClip:
     path: Weapon
     classID: 212
     script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 21300000, guid: 76a094ad255a1fc41b9dbe8af4424682, type: 3}
+    attribute: m_Sprite
+    path: Head
+    classID: 212
+    script: {fileID: 0}
   m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
@@ -405,6 +412,13 @@ AnimationClip:
       isPPtrCurve: 0
     - serializedVersion: 2
       path: 1855955664
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 130111906
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -461,6 +475,7 @@ AnimationClip:
       isPPtrCurve: 0
     pptrCurveMapping:
     - {fileID: 21300000, guid: 0f3b82df1107d264bacc2c8ad6a8ab4a, type: 3}
+    - {fileID: 21300000, guid: 76a094ad255a1fc41b9dbe8af4424682, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

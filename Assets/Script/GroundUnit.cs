@@ -6,4 +6,8 @@ public class GroundUnit : MonoBehaviour
 {
     public bool grounded;
 
+    public virtual void GetHurt()
+    {
+
+    }
 }

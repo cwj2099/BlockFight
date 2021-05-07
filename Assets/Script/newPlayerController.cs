@@ -50,6 +50,10 @@ public class newPlayerController : GroundUnit
     public PlayerFSM_base state_attack2;
     public PlayerFSM_base state_attack3;
     public PlayerFSM_base state_attackAir;
+    public PlayerFSM_base state_hurt;
+
+    public float energyMax;
+    public float energy;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +61,7 @@ public class newPlayerController : GroundUnit
         thisSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         iniScale = transform.localScale;
         currentState = state_neutral;
+        energy = energyMax;
     }
 
     public void changeState(PlayerFSM_base newState)
@@ -71,7 +76,7 @@ public class newPlayerController : GroundUnit
         movement();
         jump();
         currentState.loop(this);
-        
+        energy = Mathf.Min(energy, energyMax);
         transform.Translate(velocity * Time.deltaTime);
     }
 
@@ -106,6 +111,15 @@ public class newPlayerController : GroundUnit
             }
         }
         else {
+            if (Input.GetKeyDown(KeyCode.K)&&energy>=1)
+            {
+                energy -= 1;
+                thisRigidbody2D.velocity = Vector2.zero;
+                thisAnimator.Play("player_doubleJump");
+                thisRigidbody2D.gravityScale = 0;
+                jumpCounter = jumpTime/2;
+                velocity.y = jumpHeight / jumpTime;
+            }
             if (thisRigidbody2D.gravityScale == 0)
             {
                 if (Input.GetKey(KeyCode.K)&&jumpCounter<jumpTime)
@@ -127,5 +141,20 @@ public class newPlayerController : GroundUnit
 
         }
 
+    }
+
+    public void attempDash()
+    {
+        if (Input.GetKeyDown(KeyCode.L) && energy >= 1)
+        {
+            changeState(state_dash);
+            energy -= 1;
+        }
+    }
+
+    public override void GetHurt()
+    {
+        base.GetHurt();
+        changeState(state_hurt);
     }
 }

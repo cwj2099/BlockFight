@@ -46,9 +46,11 @@ public class Player_attack2 : PlayerFSM_base
             body.jump();
         }
 
-        if (Input.GetAxisRaw("Fire3") == 1)
+        body.attempDash();
+        if (hitbox.hit)
         {
-            body.changeState(body.state_dash);
+            hitbox.hit = false;
+            body.energy += 0.5f;
         }
     }
 
