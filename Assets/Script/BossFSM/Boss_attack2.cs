@@ -12,6 +12,7 @@ public class Boss_attack2 : Boss_FSM_Base
     {
         base.enter(body);
         counter = duration;
+        body.fist1.transform.localScale = new Vector3(body.fist1.transform.localScale.x*-1 , body.fist1.transform.localScale.y, body.fist1.transform.localScale.z);
         body.myAnimator.Play("Boss_attack2");
     }
 

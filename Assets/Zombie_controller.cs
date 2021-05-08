@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Zombie_controller : GroundUnit
 {
+    public float hp;
     public HitBox myHitbox;
     public Animator myAnimator;
     public HurtBox myHurtbox;
@@ -33,6 +34,11 @@ public class Zombie_controller : GroundUnit
                 myAnimator.Play("zombie_idle");
             }
         }
+
+        if (hp <= 0)
+        {
+            Destroy(this.gameObject);
+        }
         
     }
 
@@ -40,6 +46,7 @@ public class Zombie_controller : GroundUnit
     {
         base.GetHurt();
         stunCounter = myHurtbox.time;
+        hp -= myHurtbox.damage;
         myHurtbox.clear();
         myflashEffect.whiteSprite();
         //myAnimator.Play("zombie_hurt1");

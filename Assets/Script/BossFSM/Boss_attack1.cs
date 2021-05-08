@@ -10,6 +10,7 @@ public class Boss_attack1 : Boss_FSM_Base
     public override void enter(Boss_controller body)
     {
         base.enter(body);
+        
         counter = duration;
         body.myAnimator.Play("Boss_attack1");
     }

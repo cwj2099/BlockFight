@@ -12,7 +12,7 @@ public class Boss_idle : Boss_FSM_Base
     public override void loop(Boss_controller body)
     {
         base.loop(body);
-        body.changeState(body.state_attack3);
+        body.changeState(body.state_attack2);
     }
 
     public override void leave(Boss_controller body)

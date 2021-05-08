@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class newPlayerController : GroundUnit
 {
@@ -52,8 +53,14 @@ public class newPlayerController : GroundUnit
     public PlayerFSM_base state_attackAir;
     public PlayerFSM_base state_hurt;
 
+    public HurtBox hurtbox;
+    public float hpMax;
+    public float hp;
+    public Image hpBar;
     public float energyMax;
     public float energy;
+    public Image mpBar;
+    public Image mpBase;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +69,7 @@ public class newPlayerController : GroundUnit
         iniScale = transform.localScale;
         currentState = state_neutral;
         energy = energyMax;
+        hp = hpMax;
     }
 
     public void changeState(PlayerFSM_base newState)
@@ -78,6 +86,7 @@ public class newPlayerController : GroundUnit
         currentState.loop(this);
         energy = Mathf.Min(energy, energyMax);
         transform.Translate(velocity * Time.deltaTime);
+        uiUpdate();
     }
 
     void movement()
@@ -156,6 +165,16 @@ public class newPlayerController : GroundUnit
     public override void GetHurt()
     {
         base.GetHurt();
+        hp -= hurtbox.damage;
+        hurtbox.clear();
         changeState(state_hurt);
+    }
+
+    void uiUpdate()
+    {
+        hpBar.fillAmount = (hp / hpMax);
+        mpBar.rectTransform.sizeDelta = new Vector2(30 * energyMax, 50);
+        mpBase.rectTransform.sizeDelta = new Vector2(30 * energyMax, 50);
+        mpBar.fillAmount = (energy / energyMax);
     }
 }

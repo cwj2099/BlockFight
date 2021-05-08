@@ -9,6 +9,9 @@ public class Boss_controller : GroundUnit
     public HurtBox myHurtbox;
     public flashEffect myflashEffect;
 
+    public GameObject fist1;
+    public GameObject fist2;
+
     public Boss_FSM_Base currentState;
     public Boss_FSM_Base state_idle;
     public Boss_FSM_Base state_attack1;
