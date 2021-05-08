@@ -91,12 +91,12 @@ public class Player_rush : PlayerFSM_base
                 {
                     body.velocity = Vector2.zero;
                 }
-                if (Sp == 1)
+                if (Sp == 2)
                 {
                     if (At(counter, attackDuration)) { body.thisAnimator.Play("player_sp1"); }
                     if (At(counter, attackDuration - 0.1f)) { hitbox2.gameObject.SetActive(true); }
                 }
-                else if (Sp == 2)
+                else if (Sp == 1)
                 {
                     if (At(counter, attackDuration)) { body.thisAnimator.Play("player_sp2"); }
                     if (At(counter, attackDuration - 0.1f)) { hitbox3.gameObject.SetActive(true); }
