@@ -19,7 +19,11 @@ public class Player_attack1 : PlayerFSM_base
         base.loop(body);
         //stop player from moving
         body.velocity = Vector2.zero;
-
+        //I added this movement to avoid a very weird bug: if player and the enemy is not moving at all, sometimes the collision just do not happend
+        if (counter>duration-0.6f)
+        {
+            body.velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 1, 0);
+        }
         //if arrive this moment, do something form
         if (At(counter,duration-0.12f))
         {

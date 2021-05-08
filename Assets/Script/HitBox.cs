@@ -8,21 +8,24 @@ public class HitBox : MonoBehaviour
     public bool hit;
     public float damage;
     public float time;
-
+    [SerializeField]
     List<Collider2D> whiteList=new List<Collider2D>();
     // Start is called before the first frame update
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
+        //print("hit");
         if (!whiteList.Contains(collision))
         {
+            
             hit = true;
             hitforce.x = Mathf.Abs(hitforce.x) * Mathf.Sign(transform.parent.localScale.x);
             whiteList.Add(collision);
             
             if (collision.gameObject.GetComponent<HurtBox>())
             {
+                
                 HurtBox hurtBox= collision.gameObject.GetComponent<HurtBox>();
                 hurtBox.damage = damage;
                 hurtBox.time = time;

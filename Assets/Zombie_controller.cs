@@ -7,6 +7,7 @@ public class Zombie_controller : GroundUnit
     public HitBox myHitbox;
     public Animator myAnimator;
     public HurtBox myHurtbox;
+    public flashEffect myflashEffect;
     [SerializeField]
     float stunCounter;
     // Start is called before the first frame update
@@ -40,6 +41,7 @@ public class Zombie_controller : GroundUnit
         base.GetHurt();
         stunCounter = myHurtbox.time;
         myHurtbox.clear();
+        myflashEffect.whiteSprite();
         //myAnimator.Play("zombie_hurt1");
         if (myAnimator.GetCurrentAnimatorStateInfo(0).IsName("zombie_hurt1"))
         {

@@ -111,6 +111,7 @@ public class newPlayerController : GroundUnit
             }
         }
         else {
+            //double, or more jump if there's enough energy
             if (Input.GetKeyDown(KeyCode.K)&&energy>=1)
             {
                 energy -= 1;
