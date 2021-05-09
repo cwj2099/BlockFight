@@ -11,9 +11,11 @@ public class Zombie_controller : GroundUnit
     public HurtBox myHurtbox;
     public flashEffect myflashEffect;
     public newPlayerController player;
-    [SerializeField]
-    float stunCounter;
-    Vector3 origin;
+    
+    public float stunCounter;
+    public Vector3 origin;
+    public GameObject health;
+    bool dead = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +30,15 @@ public class Zombie_controller : GroundUnit
     {
         if (hp <= 0)
         {
-            die();
+            if (!dead)
+            {
+                die();
+            }
+            
+
+        }
+        if (dead)
+        {
             if (player != null && Mathf.Abs(player.gameObject.transform.position.x - origin.x) > 30)
             {
                 reborn();
@@ -59,16 +69,22 @@ public class Zombie_controller : GroundUnit
         }
     }
 
-    void die()
+    public virtual void die()
     {
-        myAnimator.Play("zombie_idle");
+        dead = true;
         myHitbox.gameObject.SetActive(false);
         myHurtbox.gameObject.SetActive(false);
         myAnimator.gameObject.SetActive(false);
+        if (Random.Range(0f, 4f) < 1.5f)
+        {
+            Instantiate(health, transform.position, transform.rotation);
+        }
+
     }
 
-    void reborn()
+    public virtual void reborn()
     {
+        dead = false;
         hp = maxhp;
         transform.position = origin;
         stunCounter = 0;
@@ -77,7 +93,7 @@ public class Zombie_controller : GroundUnit
         myAnimator.gameObject.SetActive(true);
     }
 
-    void life_circle()
+    public virtual void life_circle()
     {
         if (player != null && player.gameObject.transform.position.x > transform.position.x)
         {

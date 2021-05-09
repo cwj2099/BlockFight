@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Boss_controller : GroundUnit
 {
@@ -19,6 +20,7 @@ public class Boss_controller : GroundUnit
     public Boss_FSM_Base state_attack3;
 
     public newPlayerController player;
+    public float hp;
 
     public void changeState(Boss_FSM_Base newState)
     {
@@ -36,7 +38,11 @@ public class Boss_controller : GroundUnit
     // Update is called once per frame
     void Update()
     {
-
+        if (hp < 0)
+        {
+            Destroy(this.gameObject);
+            SceneManager.LoadScene("end");
+        }
 
         myHitbox.deactivate();
         myHitbox.gameObject.SetActive(true);
@@ -46,6 +52,8 @@ public class Boss_controller : GroundUnit
     public override void GetHurt()
     {
         base.GetHurt();
+        hp -= myHurtbox.damage;
+        myHurtbox.clear();
         myflashEffect.whiteSprite();
     }
 }

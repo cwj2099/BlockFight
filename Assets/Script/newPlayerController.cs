@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class newPlayerController : GroundUnit
 {
@@ -85,8 +86,13 @@ public class newPlayerController : GroundUnit
         jump();
         currentState.loop(this);
         energy = Mathf.Min(energy, energyMax);
+        hp = Mathf.Min(hp, hpMax);
         transform.Translate(velocity * Time.deltaTime);
         uiUpdate();
+        if (hp <= 0)
+        {
+            SceneManager.LoadScene("Lose");
+        }
     }
 
     void movement()

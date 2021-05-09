@@ -26,7 +26,7 @@ public class Boss_attack3 : Boss_FSM_Base
             hitbox2.gameObject.SetActive(true);
         }
 
-        if(At(counter,duration - 1.25f))
+        if(At(counter,duration - 1.5f))
         {
             hitbox1.deactivate();
             hitbox2.deactivate();

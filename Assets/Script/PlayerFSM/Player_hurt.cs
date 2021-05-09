@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player_hurt: PlayerFSM_base
 {
     public BoxCollider2D myHurtBox;
+    public HitBox hitbox;
     public float duration;
     float counter;
     public override void enter(newPlayerController body)
@@ -12,6 +13,7 @@ public class Player_hurt: PlayerFSM_base
         base.enter(body);
         counter = duration;
         myHurtBox.gameObject.SetActive(false);
+        hitbox.gameObject.SetActive(true);
         body.thisAnimator.Play("player_hurt");
     }
 
@@ -31,6 +33,7 @@ public class Player_hurt: PlayerFSM_base
     public override void leave(newPlayerController body)
     {
         base.leave(body);
+        hitbox.deactivate();
         body.thisRigidbody2D.velocity = Vector2.zero;
         body.thisAnimator.Play("player_idle");
         myHurtBox.gameObject.SetActive(true);
