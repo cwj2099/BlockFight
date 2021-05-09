@@ -32,7 +32,7 @@ public class Boss_attack1 : Boss_FSM_Base
 
         if (counter <= 0)
         {
-            body.changeState(body.state_idle);
+            body.changeState(body.state_attack3);
         }
     }
 

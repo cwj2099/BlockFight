@@ -18,6 +18,8 @@ public class Boss_controller : GroundUnit
     public Boss_FSM_Base state_attack2;
     public Boss_FSM_Base state_attack3;
 
+    public newPlayerController player;
+
     public void changeState(Boss_FSM_Base newState)
     {
         currentState.leave(this);
@@ -28,11 +30,14 @@ public class Boss_controller : GroundUnit
     void Start()
     {
         currentState = state_idle;   
+        player = FindObjectOfType<newPlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
         myHitbox.deactivate();
         myHitbox.gameObject.SetActive(true);
         currentState.loop(this);

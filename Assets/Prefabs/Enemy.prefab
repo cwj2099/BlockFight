@@ -429,11 +429,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grounded: 0
+  maxhp: 4
   hp: 4
   myHitbox: {fileID: 3965692593974561532}
   myAnimator: {fileID: 3965692594379761767}
   myHurtbox: {fileID: 3965692595260435308}
   myflashEffect: {fileID: 3965692595147378656}
+  player: {fileID: 0}
   stunCounter: 0
 --- !u!114 &3965692595147378656
 MonoBehaviour:

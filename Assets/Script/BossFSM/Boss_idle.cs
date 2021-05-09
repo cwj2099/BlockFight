@@ -12,8 +12,17 @@ public class Boss_idle : Boss_FSM_Base
     public override void loop(Boss_controller body)
     {
         base.loop(body);
-        newPlayerController player= FindObjectOfType<newPlayerController>();
-        if (Mathf.Abs(player.gameObject.transform.position.x - transform.position.x) > 10)
+        //rotate according to player
+        if (body.player != null && body.player.gameObject.transform.position.x > transform.position.x)
+        {
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else
+        {
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+
+        if ( body.player!=null&&Mathf.Abs(body.player.gameObject.transform.position.x - transform.position.x) > 10)
         {
             body.changeState(body.state_attack3);
         }
@@ -24,14 +33,11 @@ public class Boss_idle : Boss_FSM_Base
             {
                 body.changeState(body.state_attack1);
             }
-            else if(num < 2)
+            else 
             {
                 body.changeState(body.state_attack2);
             }
-            else
-            {
-                body.changeState(body.state_attack3);
-            }
+
             
         }
         
